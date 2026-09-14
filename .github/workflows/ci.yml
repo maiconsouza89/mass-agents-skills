@@ -17,7 +17,7 @@ jobs:
     name: Validate, test and build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: actions/setup-node@v4
         with:
@@ -48,7 +48,7 @@ jobs:
         continue-on-error: true
         run: npx --yes @anthropic-ai/claude-code@latest plugin validate .
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: eval-report
           path: eval-report.json
