@@ -1,0 +1,41 @@
+name: Skill bug
+description: A skill triggers wrongly, gives bad instructions or is out of date.
+title: 'bug: mass-'
+labels: [skill-bug]
+body:
+  - type: input
+    id: skill
+    attributes:
+      label: Skill
+      placeholder: mass-code-review
+    validations:
+      required: true
+  - type: dropdown
+    id: agent
+    attributes:
+      label: Agent
+      options: [claude-code, cursor, github-copilot, windsurf, codex, gemini, cline, opencode, other]
+    validations:
+      required: true
+  - type: textarea
+    id: prompt
+    attributes:
+      label: Prompt used
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: What happened
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Skill version (from the lockfile or SKILL.md)

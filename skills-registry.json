@@ -1,0 +1,613 @@
+{
+  "$schema": "./schemas/skills-registry.schema.json",
+  "registryVersion": 1,
+  "catalogVersion": "0.1.0",
+  "repo": "maiconsouza89/mass-agents-skills",
+  "rawBase": "https://raw.githubusercontent.com/maiconsouza89/mass-agents-skills",
+  "categories": {
+    "meta": {
+      "name": "Meta",
+      "description": "Skills that create, review and maintain other skills in this catalog.",
+      "order": 1
+    },
+    "quality": {
+      "name": "Quality",
+      "description": "Code review, testing strategy and everything that keeps the codebase healthy.",
+      "order": 2
+    },
+    "language": {
+      "name": "Language",
+      "description": "TypeScript conventions and language-level rules shared by every Mass Solutions project.",
+      "order": 3
+    },
+    "frontend": {
+      "name": "Frontend",
+      "description": "React, Next.js, accessibility and UI patterns.",
+      "order": 4
+    },
+    "backend": {
+      "name": "Backend",
+      "description": "NestJS, API design and server-side conventions.",
+      "order": 5
+    },
+    "workflow": {
+      "name": "Workflow",
+      "description": "Git, commits, pull requests and delivery process.",
+      "order": 6
+    },
+    "security": {
+      "name": "Security",
+      "description": "Secure coding checklists and threat-aware reviews.",
+      "order": 7
+    },
+    "performance": {
+      "name": "Performance",
+      "description": "Web performance, Core Web Vitals and bundle hygiene.",
+      "order": 8
+    }
+  },
+  "skills": [
+    {
+      "name": "mass-api-design",
+      "description": "Designs HTTP APIs to the Mass Solutions REST conventions, covering resource naming, status codes, the standard error envelope, pagination, filtering, versioning, idempotency and OpenAPI documentation. Use when the user says \"design the API\", \"REST endpoint\", \"what should the response look like\", \"pagination\", \"error format\", \"standardize our error responses\", \"API versioning\" or is defining a new HTTP contract. Do NOT use for NestJS file layout or dependency injection (use mass-nestjs-modules), Next.js route handlers as UI glue (use mass-nextjs-app-router) or GraphQL schemas.",
+      "category": "backend",
+      "tags": [
+        "api",
+        "rest",
+        "http",
+        "openapi",
+        "pagination"
+      ],
+      "owner": "@maiconsouza89",
+      "version": "1.0.0",
+      "reviewed": "2026-09-14",
+      "path": "skills/mass-api-design",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "sha256": "9f57a45cfd44e115c148e96df5886a9c49743924fe18fe5b13d4cf449faeed0d",
+          "bytes": 4940,
+          "executable": false
+        },
+        {
+          "path": "references/error-format.md",
+          "sha256": "da84ad0a006f5424274bf683483f9afc7eaa14a2b632aeb084ed942e1c1b7518",
+          "bytes": 2758,
+          "executable": false
+        },
+        {
+          "path": "references/pagination.md",
+          "sha256": "6e1741f210a85f9a6b73f42c61507d56548e98236827b5ec24e63e9954cc9535",
+          "bytes": 2333,
+          "executable": false
+        }
+      ],
+      "contentHash": "839eaea01ab631cd14cf28288b527984409298f0cb33662151d38a2c7faa0f1a",
+      "tokens": {
+        "skillMd": 1235,
+        "total": 2509
+      },
+      "license": "MIT"
+    },
+    {
+      "name": "mass-code-review",
+      "description": "Reviews a pull request or branch of TypeScript, React, Next.js or NestJS code and delivers one consolidated, evidence-backed review with severity-ranked findings. Use when the user says \"review this PR\", \"code review\", \"check my branch before merge\", \"review my changes\" or pastes a pull request URL. Do NOT use for writing tests (use mass-testing-strategy), fixing CI failures, or general refactoring without a review request.",
+      "category": "quality",
+      "tags": [
+        "review",
+        "pull-request",
+        "quality",
+        "github"
+      ],
+      "owner": "@maiconsouza89",
+      "version": "1.0.0",
+      "reviewed": "2026-09-14",
+      "path": "skills/mass-code-review",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "sha256": "6198e79e826dc273d8cc3e6c47c0f0be72fc3ee0e152be11fec222bce48befc3",
+          "bytes": 5688,
+          "executable": false
+        },
+        {
+          "path": "references/review-checklist.md",
+          "sha256": "8b2dfff6e9f13b7ac5bb81b34e98031c765fdf1ee96ef20ebf8fe96404f4188c",
+          "bytes": 3392,
+          "executable": false
+        },
+        {
+          "path": "references/severity-rubric.md",
+          "sha256": "aeb64608115c5dda682db710d54580cfb808bc75e8b6046563f8854e88cf8231",
+          "bytes": 1787,
+          "executable": false
+        },
+        {
+          "path": "scripts/pr-context.sh",
+          "sha256": "fd125e415b314cbff53de18fc6785955820204321958c08bd838b6d5e57e55a6",
+          "bytes": 1667,
+          "executable": true
+        }
+      ],
+      "contentHash": "749e112ea16a1e9aaba863b62a82a1da87911394c2fc0fe299987fcb6e1e43f6",
+      "tokens": {
+        "skillMd": 1422,
+        "total": 2717
+      },
+      "license": "MIT",
+      "compatibility": "Works best with git and the GitHub CLI (gh) available; falls back to a local diff review without gh.",
+      "requires": {
+        "skills": [
+          "mass-typescript-conventions"
+        ],
+        "tools": [
+          "git",
+          "gh"
+        ]
+      }
+    },
+    {
+      "name": "mass-commit-and-pr",
+      "description": "Produces commits, branches and pull requests that follow the Mass Solutions delivery conventions, with Conventional Commits messages, branch naming, small reviewable PRs, a filled PR template and changelog entries. Use when the user says \"commit this\", \"write a commit message\", \"open a PR\", \"create a pull request\", \"name the branch\" or \"get this ready to merge\". Do NOT use for reviewing someone else's PR (use mass-code-review), fixing CI failures or release versioning of npm packages.",
+      "category": "workflow",
+      "tags": [
+        "git",
+        "commits",
+        "pull-requests",
+        "conventional-commits"
+      ],
+      "owner": "@maiconsouza89",
+      "version": "1.0.0",
+      "reviewed": "2026-09-14",
+      "path": "skills/mass-commit-and-pr",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "sha256": "f8567b1089dc60754c5aa434b659a9af345078ee10623de2d7cb5e7f6b658de4",
+          "bytes": 4575,
+          "executable": false
+        },
+        {
+          "path": "assets/pr-template.md",
+          "sha256": "106276e65ba1dc98dfd4164358625eefe3593844701a55b6ee9ce93095a32089",
+          "bytes": 888,
+          "executable": false
+        },
+        {
+          "path": "scripts/check-commit-msg.sh",
+          "sha256": "a1ad4936ab15e9039c702448f9722c45f2d1e79a8023b63c6389cc746cf91ddc",
+          "bytes": 1383,
+          "executable": true
+        }
+      ],
+      "contentHash": "361b1a3951e6644d8612890cd600374b6277d6fc72d3aa555d09ee5e4e762b25",
+      "tokens": {
+        "skillMd": 1144,
+        "total": 1366
+      },
+      "license": "MIT",
+      "compatibility": "Uses git and, when available, the GitHub CLI (gh).",
+      "requires": {
+        "tools": [
+          "git",
+          "gh"
+        ]
+      }
+    },
+    {
+      "name": "mass-nestjs-modules",
+      "description": "Creates and refactors NestJS modules following the Mass Solutions layout, with thin controllers, validated DTOs, application services, repositories behind interfaces, exception filters and dependency injection rules. Use when the user says \"create a NestJS module\", \"add an endpoint in Nest\", \"new controller\", \"new service\", \"where does this logic go in Nest\" or is working in a NestJS codebase. Do NOT use for REST contract decisions such as pagination or error envelope shape (use mass-api-design), TypeScript typing rules (use mass-typescript-conventions) or writing tests (use mass-testing-strategy).",
+      "category": "backend",
+      "tags": [
+        "nestjs",
+        "backend",
+        "modules",
+        "dependency-injection"
+      ],
+      "owner": "@maiconsouza89",
+      "version": "1.0.0",
+      "reviewed": "2026-09-14",
+      "path": "skills/mass-nestjs-modules",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "sha256": "6a8b1020dd63e7710fd04ffb8ae2ff4f8458d1c8ef7adb885f34fb6fabae7da2",
+          "bytes": 5257,
+          "executable": false
+        },
+        {
+          "path": "assets/module.template.ts",
+          "sha256": "3e9d9d57aeab39e93360b03fd8bb1b1b7241f37870a77e683cbb6107cc99ee94",
+          "bytes": 2757,
+          "executable": false
+        },
+        {
+          "path": "references/dto-validation.md",
+          "sha256": "5b5661346e1689596915b5124a026e91fc6cf42007a4b2f0e09eaaad0e4b3003",
+          "bytes": 2136,
+          "executable": false
+        },
+        {
+          "path": "references/module-layout.md",
+          "sha256": "0cd341469e29598f9e3285c2347c7f7986fb1e7dc9786c006a26561e1d3b8cd7",
+          "bytes": 2535,
+          "executable": false
+        }
+      ],
+      "contentHash": "af3be8e10f74619d7b6c3928f3613dbfcba0b70ee05193e844d46df470af2199",
+      "tokens": {
+        "skillMd": 1315,
+        "total": 2483
+      },
+      "license": "MIT",
+      "compatibility": "Targets NestJS 10 or newer with class-validator or zod for DTO validation.",
+      "requires": {
+        "skills": [
+          "mass-typescript-conventions",
+          "mass-api-design"
+        ]
+      }
+    },
+    {
+      "name": "mass-nextjs-app-router",
+      "description": "Guides Next.js App Router work at Mass Solutions, deciding between server and client components, route handlers, server actions, caching and revalidation, metadata and loading or error boundaries. Use when the user says \"add a page\", \"add a route\", \"server component or client component\", \"the page shows old data after an update\", \"stale data after mutation\", \"set up caching\" or is working inside a Next.js app directory. Do NOT use for generic React component structure (use mass-react-components), REST API contract design (use mass-api-design) or Core Web Vitals tuning (use mass-web-performance).",
+      "category": "frontend",
+      "tags": [
+        "nextjs",
+        "app-router",
+        "server-components",
+        "caching"
+      ],
+      "owner": "@maiconsouza89",
+      "version": "1.0.0",
+      "reviewed": "2026-09-14",
+      "path": "skills/mass-nextjs-app-router",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "sha256": "07a34d7a75f728c8176e9013c3c8d7c83dabcbeca4329d6f073b433f1f875de3",
+          "bytes": 5174,
+          "executable": false
+        },
+        {
+          "path": "references/caching-and-revalidation.md",
+          "sha256": "b64e0fd5d1d03af3a43fea9d3461234791c4a8d0b561f11a721c33ff1da784f9",
+          "bytes": 2058,
+          "executable": false
+        },
+        {
+          "path": "references/server-actions.md",
+          "sha256": "8519b04c3bd404048bfc2eeef5314d0404c23547f5d6addb41bb27d1a8511f88",
+          "bytes": 2645,
+          "executable": false
+        }
+      ],
+      "contentHash": "7ac7a3bc629dd76a8b9adaf7205e776c3b3861768429760cf595f140bc9843b5",
+      "tokens": {
+        "skillMd": 1294,
+        "total": 2471
+      },
+      "license": "MIT",
+      "compatibility": "Targets Next.js 15 or newer with the App Router.",
+      "requires": {
+        "skills": [
+          "mass-react-components"
+        ]
+      }
+    },
+    {
+      "name": "mass-react-components",
+      "description": "Structures React components the Mass Solutions way, covering file layout, props typing, hooks rules, state placement, composition over configuration and colocated tests. Use when the user says \"create a component\", \"split this component\", \"refactor this React code\", \"where should this state live\" or is adding UI in a React or Next.js project. Do NOT use for Next.js routing, caching or server components (use mass-nextjs-app-router), accessibility audits (use mass-web-accessibility) or performance profiling (use mass-web-performance).",
+      "category": "frontend",
+      "tags": [
+        "react",
+        "components",
+        "hooks",
+        "frontend"
+      ],
+      "owner": "@maiconsouza89",
+      "version": "1.0.0",
+      "reviewed": "2026-09-14",
+      "path": "skills/mass-react-components",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "sha256": "ea630d446bda6831474467bf48261d6a29faf5521c0f34c127a106df81545e25",
+          "bytes": 4678,
+          "executable": false
+        },
+        {
+          "path": "assets/Component.template.tsx",
+          "sha256": "e88f4a20953dfd6797c3495748a52f6c155c4081a1e1038a669bece0b079dd32",
+          "bytes": 1175,
+          "executable": false
+        },
+        {
+          "path": "references/component-patterns.md",
+          "sha256": "fc0e74a2b8fbde1588be11ad14d39f12e1fc17ed8f0b848beeb19068f64a5d30",
+          "bytes": 3241,
+          "executable": false
+        }
+      ],
+      "contentHash": "3cb8c9187044dbb38eb25e8a955cac880ab040c48132e39e0070af502458052e",
+      "tokens": {
+        "skillMd": 1170,
+        "total": 1981
+      },
+      "license": "MIT",
+      "requires": {
+        "skills": [
+          "mass-typescript-conventions"
+        ]
+      }
+    },
+    {
+      "name": "mass-security-checklist",
+      "description": "Runs a security pass over Node, Next.js and NestJS code against the Mass Solutions OWASP-based checklist, covering authentication, authorisation, input validation, secrets handling, security headers, dependencies and logging, and reports concrete findings with fixes. Use when the user says \"security review\", \"is this secure\", \"check for vulnerabilities\", \"OWASP\", \"we are handling passwords or tokens here\" or before shipping anything that touches auth, payments or personal data. Do NOT use for general code review without a security focus (use mass-code-review), accessibility (use mass-web-accessibility) or infrastructure hardening outside the application code.",
+      "category": "security",
+      "tags": [
+        "security",
+        "owasp",
+        "secrets",
+        "authentication"
+      ],
+      "owner": "@maiconsouza89",
+      "version": "1.0.0",
+      "reviewed": "2026-09-14",
+      "path": "skills/mass-security-checklist",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "sha256": "c704a8b42ca677a03e076e7764b86e1007136fe7458bd135d2a8f662f6dc2937",
+          "bytes": 4914,
+          "executable": false
+        },
+        {
+          "path": "references/owasp-web.md",
+          "sha256": "79a2fe28122df2e7fc27c1574b00d234d2acda4608e9f98a0fe1ff02a6d98a00",
+          "bytes": 4282,
+          "executable": false
+        },
+        {
+          "path": "scripts/scan-secrets.sh",
+          "sha256": "6de0402ebe5ec5d97b6c1c7a0d737f6aaea329da8f88deb702dffe04bc3a51d4",
+          "bytes": 1595,
+          "executable": true
+        }
+      ],
+      "contentHash": "037eea266e1c5d7b3d88448f39d233ba3191828cd8c62387ccb6dfbd06790132",
+      "tokens": {
+        "skillMd": 1229,
+        "total": 2300
+      },
+      "license": "MIT",
+      "requires": {
+        "tools": [
+          "git",
+          "npm"
+        ]
+      }
+    },
+    {
+      "name": "mass-skill-architect",
+      "description": "Designs, writes and refactors skills for the Mass Solutions catalog so they pass the validator, trigger accurately and stay within token budgets. Use when the user says \"create a skill\", \"new skill\", \"turn this into a skill\", \"improve this skill\", \"fix the validator errors\" or asks how to teach an agent a repeatable workflow. Do NOT use for writing application code, reviewing pull requests (use mass-code-review) or authoring subagents.",
+      "category": "meta",
+      "tags": [
+        "skills",
+        "authoring",
+        "governance",
+        "catalog"
+      ],
+      "owner": "@maiconsouza89",
+      "version": "1.0.0",
+      "reviewed": "2026-09-14",
+      "path": "skills/mass-skill-architect",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "sha256": "499cbb5c617b2525028752b1e2518685ed9f50da0db95b717c15afd301fe8d49",
+          "bytes": 7854,
+          "executable": false
+        },
+        {
+          "path": "references/description-formula.md",
+          "sha256": "fe30184477ad6028e36fa90fecf341dccc171f38b2ef7f51f5e8bc898092d5e6",
+          "bytes": 2401,
+          "executable": false
+        },
+        {
+          "path": "references/frontmatter-contract.md",
+          "sha256": "2175cd331745b00f3bf104c732f8fa661c0953eaf2b3744556605689683849da",
+          "bytes": 3683,
+          "executable": false
+        },
+        {
+          "path": "references/skill-template.md",
+          "sha256": "7f82ca9352d363659f82082b00f648b156c4206bf12efeed9abae76a59cb9101",
+          "bytes": 1934,
+          "executable": false
+        },
+        {
+          "path": "scripts/scaffold.sh",
+          "sha256": "f351ba7f283d59b5dfaf2fb5e3f4ade6b055377608e43e803bcd108175a1d226",
+          "bytes": 731,
+          "executable": true
+        }
+      ],
+      "contentHash": "7220ce1e3887b47ad7519e5d3bd4bbee4d6550451040201b78b656561a7341f4",
+      "tokens": {
+        "skillMd": 1964,
+        "total": 3970
+      },
+      "license": "MIT",
+      "requires": {
+        "tools": [
+          "node"
+        ]
+      }
+    },
+    {
+      "name": "mass-testing-strategy",
+      "description": "Writes and organises tests for TypeScript, React, Next.js and NestJS projects using the Mass Solutions test pyramid, with Vitest or Jest for unit and integration tests, Testing Library for components and Playwright for end-to-end flows. Use when the user says \"write tests\", \"add tests\", \"add unit tests\", \"test coverage\", \"how should I test this\", \"add an e2e test\" or \"the tests are flaky\". Do NOT use for reviewing a PR (use mass-code-review), accessibility-only checks (use mass-web-accessibility) or performance measurement (use mass-web-performance).",
+      "category": "quality",
+      "tags": [
+        "testing",
+        "vitest",
+        "playwright",
+        "testing-library"
+      ],
+      "owner": "@maiconsouza89",
+      "version": "1.0.0",
+      "reviewed": "2026-09-14",
+      "path": "skills/mass-testing-strategy",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "sha256": "64ae30ffbd32f441165ec7ab7856c71acd60084bc245cad175bfd5a4623c4fe9",
+          "bytes": 5005,
+          "executable": false
+        },
+        {
+          "path": "references/e2e-playwright.md",
+          "sha256": "e61d6083277bbdbdb4dd6d4df2a28ded6a45102238d9d04f1ee78e5ffba4bad2",
+          "bytes": 2291,
+          "executable": false
+        },
+        {
+          "path": "references/unit-vs-integration.md",
+          "sha256": "552435d184b709bf8c4ab15515ed6bedd6c785693fe668bc73310c5bb12b6886",
+          "bytes": 2661,
+          "executable": false
+        }
+      ],
+      "contentHash": "d7b39d1288482508b6e9f4bf36e8102ee08ac9e8a9425ba6518961dc7f35dbb2",
+      "tokens": {
+        "skillMd": 1252,
+        "total": 2491
+      },
+      "license": "MIT"
+    },
+    {
+      "name": "mass-typescript-conventions",
+      "description": "Applies the Mass Solutions TypeScript conventions (strict compiler options, no any, discriminated unions, typed errors, naming and module boundaries) when writing or refactoring TypeScript. Use when the user says \"follow our TypeScript conventions\", \"type this properly\", \"remove the any\", \"make this strict\", \"set up tsconfig and eslint\" or is writing new TypeScript in a Mass Solutions project. Do NOT use for React component structure (use mass-react-components), NestJS module layout (use mass-nestjs-modules) or reviewing a PR (use mass-code-review).",
+      "category": "language",
+      "tags": [
+        "typescript",
+        "conventions",
+        "strict",
+        "types"
+      ],
+      "owner": "@maiconsouza89",
+      "version": "1.0.0",
+      "reviewed": "2026-09-14",
+      "path": "skills/mass-typescript-conventions",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "sha256": "6e0671d7e9482fce00b97d21b67df63266948eac429f5679299523619b0d01eb",
+          "bytes": 4722,
+          "executable": false
+        },
+        {
+          "path": "assets/tsconfig.base.json",
+          "sha256": "23665131b1a04666d19adb2efe66992fe35659d2e58f422a571b018a6822d8b6",
+          "bytes": 634,
+          "executable": false
+        },
+        {
+          "path": "references/eslint-baseline.md",
+          "sha256": "0bdd8ae99fa29f02e9d98360c9ba1ac5620ee1d27edbbf19b73e8ea9d295af77",
+          "bytes": 2884,
+          "executable": false
+        }
+      ],
+      "contentHash": "93ddc230485b5e002915dae7cf17624ab80c358c95808839103d067692bc7170",
+      "tokens": {
+        "skillMd": 1181,
+        "total": 1902
+      },
+      "license": "MIT"
+    },
+    {
+      "name": "mass-web-accessibility",
+      "description": "Makes React and Next.js interfaces meet WCAG 2.2 AA by fixing semantics, keyboard navigation, focus management, forms, colour contrast and ARIA, and verifies with axe. Use when the user says \"accessibility\", \"a11y\", \"screen reader\", \"keyboard navigation\", \"does not work with the keyboard\", \"add a11y tests\", \"WCAG\", \"audit this form\" or \"make this accessible\". Do NOT use for general component structure (use mass-react-components), visual performance (use mass-web-performance) or SEO.",
+      "category": "frontend",
+      "tags": [
+        "accessibility",
+        "a11y",
+        "wcag",
+        "react"
+      ],
+      "owner": "@maiconsouza89",
+      "version": "1.0.0",
+      "reviewed": "2026-09-14",
+      "path": "skills/mass-web-accessibility",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "sha256": "4bced81a6ddcc58b83cd495209fdbde7dae2752d578c0884ead6186792f6d5e0",
+          "bytes": 4468,
+          "executable": false
+        },
+        {
+          "path": "references/wcag-checklist.md",
+          "sha256": "a4b3948f59bc91c1a1265057a6a70da91d06df653260848164dad7635a13bdcd",
+          "bytes": 3802,
+          "executable": false
+        }
+      ],
+      "contentHash": "a78e679987b09d233eeef0b41b89f758342cfc15cce2e82426486af13bff790a",
+      "tokens": {
+        "skillMd": 1117,
+        "total": 2068
+      },
+      "license": "MIT",
+      "requires": {
+        "tools": [
+          "npx"
+        ]
+      }
+    },
+    {
+      "name": "mass-web-performance",
+      "description": "Measures and improves web performance in React and Next.js applications, targeting Core Web Vitals (LCP, INP, CLS), bundle size, render performance and image or font loading, always with before and after numbers. Use when the user says \"the page is slow\", \"improve performance\", \"LCP\", \"INP\", \"bundle size\", \"Lighthouse score\" or \"why does this re-render\". Do NOT use for backend query performance without a UI symptom, component structure (use mass-react-components) or caching semantics in the App Router (use mass-nextjs-app-router).",
+      "category": "performance",
+      "tags": [
+        "performance",
+        "core-web-vitals",
+        "lighthouse",
+        "bundle"
+      ],
+      "owner": "@maiconsouza89",
+      "version": "1.0.0",
+      "reviewed": "2026-09-14",
+      "path": "skills/mass-web-performance",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "sha256": "d97581b14d782fb45b6b55a9788ce6cda32bdf29df779c75d9bc2c1500dce2ae",
+          "bytes": 4234,
+          "executable": false
+        },
+        {
+          "path": "references/core-web-vitals.md",
+          "sha256": "c69b077b3daa1664c522e59a70264c1acad47664791b37c1ece217d6fdf99afa",
+          "bytes": 3279,
+          "executable": false
+        }
+      ],
+      "contentHash": "5da0b361cd97dde4ee58d8ff7104fb569fcef90f8bb69c31850f9ffd8cdcbb4b",
+      "tokens": {
+        "skillMd": 1059,
+        "total": 1879
+      },
+      "license": "MIT",
+      "requires": {
+        "tools": [
+          "npx"
+        ]
+      }
+    }
+  ],
+  "deprecated": []
+}

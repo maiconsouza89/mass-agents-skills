@@ -1,0 +1,14 @@
+positive:
+  - "create a skill that teaches the agent our deploy checklist"
+  - "turn this workflow into a new skill for the catalog"
+  - "mass-api-design fails the validator, fix the skill"
+  - "how do I write a SKILL.md that triggers correctly"
+  - "improve this skill, it keeps loading when it should not"
+negative:
+  - prompt: "review this pull request before I merge"
+    expect: mass-code-review
+  - prompt: "write unit tests for the checkout service"
+    expect: mass-testing-strategy
+  - prompt: "create a NestJS module for invoices"
+    expect: mass-nestjs-modules
+  - prompt: "what is the capital of France"

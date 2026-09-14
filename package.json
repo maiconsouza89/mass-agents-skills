@@ -24,15 +24,15 @@
     "access": "public"
   },
   "scripts": {
-    "build:cli": "esbuild src/cli/bin.ts --bundle --platform=node --format=esm --target=node22 --outfile=dist/bin.js --banner:js=\"#!/usr/bin/env node\" && node -e \"require('fs').chmodSync('dist/bin.js', 0o755)\"",
+    "build:cli": "esbuild src/cli/bin.ts --bundle --platform=node --format=esm --target=node22 --outfile=dist/bin.js && node -e \"require('fs').chmodSync('dist/bin.js', 0o755)\"",
     "build:site": "node site/build.ts --base /mass-agents-skills/",
     "build": "npm run build:cli && npm run build:site",
     "prepare": "npm run build:cli",
     "typecheck": "tsc --noEmit",
-    "test": "node --test \"src/**/*.test.ts\" \"tools/**/*.test.ts\"",
+    "test": "node --test \"src/**/*.test.ts\" \"tools/**/*.test.ts\" \"site/**/*.test.ts\"",
     "validate": "node tools/validate-skills.ts",
     "registry": "node tools/generate-registry.ts",
-    "registry:check": "node tools/generate-registry.ts --check",
+    "registry:check": "node tools/generate-registry.ts --check --readme",
     "eval:triggers": "node tools/eval-triggers.ts",
     "staleness": "node tools/staleness-report.ts --days 90",
     "new-skill": "node tools/new-skill.ts",

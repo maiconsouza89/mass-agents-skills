@@ -1,0 +1,15 @@
+positive:
+  - "review this PR before I merge it"
+  - "can you do a code review of my branch"
+  - "check my changes, anything wrong before I open the pull request?"
+  - "https://github.com/mass-solutions/app/pull/128 please review"
+  - "give me a review of the invoice service changes"
+negative:
+  - prompt: "write unit tests for the checkout service"
+    expect: mass-testing-strategy
+  - prompt: "create a new skill for our deploy checklist"
+    expect: mass-skill-architect
+  - prompt: "write a conventional commit message for these changes"
+    expect: mass-commit-and-pr
+  - prompt: "why is the CI pipeline failing on lint"
+  - prompt: "what is the capital of France"

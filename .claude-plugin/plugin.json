@@ -1,0 +1,13 @@
+{
+  "name": "mass-solutions-skills",
+  "description": "Mass Solutions skills for TypeScript, React, Next.js and NestJS teams: code review, testing, API design, security, performance, delivery and skill authoring.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Mass Solutions",
+    "url": "https://github.com/maiconsouza89"
+  },
+  "homepage": "https://maiconsouza89.github.io/mass-agents-skills/",
+  "repository": "https://github.com/maiconsouza89/mass-agents-skills",
+  "license": "MIT",
+  "keywords": ["skills", "typescript", "react", "nextjs", "nestjs", "code-review", "testing"]
+}

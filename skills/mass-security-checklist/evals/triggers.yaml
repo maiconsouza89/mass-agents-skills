@@ -1,0 +1,14 @@
+positive:
+  - "security review of the new customer export endpoint"
+  - "is this login flow secure"
+  - "check the payments module for vulnerabilities before we ship"
+  - "run an OWASP pass on the webhook handler"
+  - "we are storing tokens here, anything I should worry about"
+negative:
+  - prompt: "review this pull request for code quality"
+    expect: mass-code-review
+  - prompt: "audit this form for accessibility"
+    expect: mass-web-accessibility
+  - prompt: "design the REST error format"
+    expect: mass-api-design
+  - prompt: "convert 30 celsius to fahrenheit"

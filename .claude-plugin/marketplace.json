@@ -1,0 +1,27 @@
+{
+  "name": "mass-solutions",
+  "owner": {
+    "name": "Mass Solutions",
+    "url": "https://github.com/maiconsouza89"
+  },
+  "metadata": {
+    "description": "Mass Solutions internal skills catalog for Claude Code."
+  },
+  "plugins": [
+    {
+      "name": "mass-solutions-skills",
+      "source": "./",
+      "description": "All Mass Solutions skills: TypeScript conventions, React and Next.js patterns, NestJS modules, API design, testing, code review, security, performance, commits and PRs, and skill authoring.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Mass Solutions"
+      },
+      "homepage": "https://maiconsouza89.github.io/mass-agents-skills/",
+      "repository": "https://github.com/maiconsouza89/mass-agents-skills",
+      "license": "MIT",
+      "category": "development",
+      "keywords": ["skills", "typescript", "react", "nextjs", "nestjs"],
+      "tags": ["mass-solutions", "typescript", "web"]
+    }
+  ]
+}
