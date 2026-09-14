@@ -26,6 +26,8 @@ npx github:maiconsouza89/mass-agents-skills install mass-code-review mass-testin
 npx @mass-solutions/agent-skills install mass-code-review -a auto
 ```
 
+While the repository is private, set `MASS_SKILLS_TOKEN` or `GITHUB_TOKEN` (a token with read access) so the CLI can download from GitHub; `npx github:` and the Claude Code marketplace use your git credentials instead.
+
 `-a` accepts agent ids, `all`, or `auto` (agents detected in the project or home directory). Add `--global` to install under your home directory instead of the current project, and `--symlink` to keep one copy in `.mass-skills/` linked into every agent folder.
 
 Other commands: `search <query>`, `update [--check]`, `remove <skills...>`, `doctor` (finds drift, outdated and unmanaged skills). Every install is recorded in `.mass-skills.lock.json` and every file is verified against the sha256 in `skills-registry.json`.

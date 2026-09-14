@@ -16,14 +16,36 @@ export interface SkillSource {
   readFile(skill: RegistrySkill, path: string): Promise<Buffer>
 }
 
-async function fetchWithRetry(context: CliContext, url: string): Promise<Buffer> {
+/** Token for private repositories: MASS_SKILLS_TOKEN, then GITHUB_TOKEN, then GH_TOKEN. */
+export function githubToken(env: NodeJS.ProcessEnv): string | null {
+  return env['MASS_SKILLS_TOKEN'] || env['GITHUB_TOKEN'] || env['GH_TOKEN'] || null
+}
+
+export const DEFAULT_REPO = 'maiconsouza89/mass-agents-skills'
+
+/**
+ * Downloads one file. Tries raw.githubusercontent.com first; when that returns 404 and a token is
+ * present, falls back to the GitHub Contents API, which accepts every token type for private repos.
+ */
+async function fetchWithRetry(context: CliContext, url: string, fallback?: { repo: string; ref: string; path: string }): Promise<Buffer> {
   let lastError: unknown
+  const token = githubToken(context.env)
+  const headers: Record<string, string> = { 'user-agent': 'mass-skills' }
+  if (token) headers['authorization'] = `Bearer ${token}`
   for (let attempt = 1; attempt <= FETCH_RETRIES; attempt++) {
     const controller = new AbortController()
     const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS)
     try {
-      const response = await context.fetch(url, { signal: controller.signal, headers: { 'user-agent': 'mass-skills' } })
-      if (response.status === 404) throw new CliError(`not found: ${url}`)
+      let response = await context.fetch(url, { signal: controller.signal, headers })
+      if (response.status === 404 && token && fallback) {
+        const apiUrl = `https://api.github.com/repos/${fallback.repo}/contents/${fallback.path}?ref=${encodeURIComponent(fallback.ref)}`
+        response = await context.fetch(apiUrl, { signal: controller.signal, headers: { ...headers, accept: 'application/vnd.github.raw+json' } })
+      }
+      if (response.status === 404) {
+        const hint = token ? 'check the ref and that the token can read the repository' : 'private repositories need a token: set MASS_SKILLS_TOKEN or GITHUB_TOKEN (or run from a checkout with --from)'
+        throw new CliError(`not found: ${url} (${hint})`)
+      }
+      if (response.status === 401 || response.status === 403) throw new CliError(`access denied for ${url} (HTTP ${response.status}); set MASS_SKILLS_TOKEN or GITHUB_TOKEN with read access`)
       if (!response.ok) throw new Error(`HTTP ${response.status} for ${url}`)
       return Buffer.from(await response.arrayBuffer())
     } catch (error) {
@@ -55,10 +77,10 @@ export function createLocalSource(root: string): SkillSource {
   }
 }
 
-export function createRemoteSource(context: CliContext, repoRawBase?: string): SkillSource {
+export function createRemoteSource(context: CliContext, repo: string = context.env['MASS_SKILLS_REPO'] ?? DEFAULT_REPO): SkillSource {
   let cached: SkillsRegistry | null = null
   const ref = context.ref
-  const rawBase = () => context.rawBaseOverride ?? repoRawBase ?? 'https://raw.githubusercontent.com/maiconsouza89/mass-agents-skills'
+  const rawBase = () => context.rawBaseOverride ?? `https://raw.githubusercontent.com/${repo}`
   return {
     kind: 'remote',
     describe: () => `${rawBase()}@${ref}`,
@@ -72,7 +94,7 @@ export function createRemoteSource(context: CliContext, repoRawBase?: string): S
           return cached
         }
       }
-      const buffer = await fetchWithRetry(context, `${rawBase()}/${ref}/skills-registry.json`)
+      const buffer = await fetchWithRetry(context, `${rawBase()}/${ref}/skills-registry.json`, { repo, ref, path: 'skills-registry.json' })
       const registry = JSON.parse(buffer.toString('utf8')) as SkillsRegistry
       if (registry.registryVersion !== 1) throw new CliError(`unsupported registry version ${String(registry.registryVersion)}; update mass-skills`)
       await mkdir(join(context.cacheDir, 'registry'), { recursive: true })
@@ -83,7 +105,7 @@ export function createRemoteSource(context: CliContext, repoRawBase?: string): S
     async readFile(skill, path) {
       const entry = skill.files.find((file) => file.path === path)
       if (!entry) throw new CliError(`${skill.name}: ${path} is not listed in the registry`)
-      const buffer = await fetchWithRetry(context, `${rawBase()}/${ref}/${skill.path}/${path}`)
+      const buffer = await fetchWithRetry(context, `${rawBase()}/${ref}/${skill.path}/${path}`, { repo, ref, path: `${skill.path}/${path}` })
       const digest = sha256(buffer)
       if (digest !== entry.sha256) {
         throw new CliError(`checksum mismatch for ${skill.name}/${path}: registry says ${entry.sha256.slice(0, 12)}, got ${digest.slice(0, 12)}. The registry and ref may be out of sync; retry with --refresh or pin --ref to a tag.`)

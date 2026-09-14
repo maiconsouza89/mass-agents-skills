@@ -14,7 +14,7 @@
 **At install time** (`mass-skills`):
 
 - The registry lists every file with its sha256 and every skill with a content hash. Downloads that do not match are rejected and never written to an agent directory.
-- The CLI downloads from a pinned git ref (`--ref`, default `main`) and never executes downloaded content.
+- The CLI downloads from a pinned git ref (`--ref`, default `main`) and never executes downloaded content. For private repositories it sends the token from `MASS_SKILLS_TOKEN` or `GITHUB_TOKEN` as a bearer header to GitHub only; the token is never written to disk or logs.
 - Skill names are sanitised and every write is checked to stay inside the agent's skills directory.
 - Installs are recorded in `.mass-skills.lock.json`; `mass-skills doctor` reports local modifications, dangling symlinks and unmanaged skill folders.
 - Agents other than Claude Code receive `SKILL.md` without `allowed-tools`, so no tool pre-approval leaks into agents with different permission models.

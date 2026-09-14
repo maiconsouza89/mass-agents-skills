@@ -27,7 +27,8 @@ global options
   -h, --help          show this help
 
 environment
-  MASS_SKILLS_REF, MASS_SKILLS_RAW_BASE (mirror), MASS_SKILLS_CACHE, MASS_SKILLS_HOME
+  MASS_SKILLS_TOKEN or GITHUB_TOKEN   read access for private repositories
+  MASS_SKILLS_REPO (owner/name), MASS_SKILLS_REF, MASS_SKILLS_RAW_BASE (mirror), MASS_SKILLS_CACHE, MASS_SKILLS_HOME
 `
 
 export async function run(argv: string[]): Promise<number> {

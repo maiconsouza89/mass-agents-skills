@@ -116,19 +116,23 @@ test('remote source verifies file hashes', async () => {
     ['https://example.invalid/raw/main/skills-registry.json', JSON.stringify(registry)],
     ['https://example.invalid/raw/main/skills/mass-x/SKILL.md', 'tampered'],
   ])
-  const fakeFetch = (async (url: string | URL | Request) => {
+  const seenAuth: string[] = []
+  const fakeFetch = (async (url: string | URL | Request, init?: RequestInit) => {
+    seenAuth.push(String((init?.headers as Record<string, string> | undefined)?.['authorization'] ?? ''))
     const body = responses.get(String(url))
     return new Response(body ?? 'nope', { status: body === undefined ? 404 : 200 })
   }) as typeof fetch
   const root = await mkdtemp(join(tmpdir(), 'mass-skills-remote-'))
   try {
-    const context = await createContext({ cwd: root, projectRoot: root, home: root, cacheDir: join(root, 'cache'), from: null, fetch: fakeFetch, rawBaseOverride: 'https://example.invalid/raw', color: false })
+    const context = await createContext({ cwd: root, projectRoot: root, home: root, cacheDir: join(root, 'cache'), from: null, fetch: fakeFetch, rawBaseOverride: 'https://example.invalid/raw', color: false, env: { GITHUB_TOKEN: 'secret-token' } })
     const source = createRemoteSource(context)
     const loaded = await source.registry()
     assert.equal(loaded.skills[0]!.name, 'mass-x')
     await assert.rejects(source.readFile(loaded.skills[0]!, 'SKILL.md'), /checksum mismatch/)
     assert.throws(() => resolveSkills(loaded, ['mass-old'], { withDependencies: true }), /deprecated/)
     assert.throws(() => resolveSkills(loaded, ['mass-missing'], { withDependencies: true }), /unknown skill/)
+    assert.ok(seenAuth.every((value) => value === 'Bearer secret-token'), 'token sent on every request')
+    await assert.rejects(source.readFile({ ...loaded.skills[0]!, files: [{ path: 'missing.md', sha256: 'x', bytes: 1, executable: false }] }, 'missing.md'), /not found/)
   } finally {
     await rm(root, { recursive: true, force: true })
   }
