@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://maiconsouza89.github.io/mass-agents-skills/schemas/skills-registry.schema.json",
+  "title": "Mass Solutions skills registry",
+  "type": "object",
+  "required": ["registryVersion", "catalogVersion", "repo", "rawBase", "categories", "skills", "deprecated"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "registryVersion": { "const": 1 },
+    "catalogVersion": { "type": "string" },
+    "repo": { "type": "string" },
+    "rawBase": { "type": "string", "format": "uri" },
+    "categories": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["name", "description", "order"],
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "order": { "type": "integer" }
+        }
+      }
+    },
+    "skills": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "description", "category", "tags", "owner", "version", "reviewed", "path", "files", "contentHash", "tokens"],
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "category": { "type": "string" },
+          "tags": { "type": "array", "items": { "type": "string" } },
+          "owner": { "type": "string" },
+          "version": { "type": "string" },
+          "reviewed": { "type": "string" },
+          "license": { "type": "string" },
+          "compatibility": { "type": "string" },
+          "requires": { "type": "object" },
+          "source": { "type": "object" },
+          "path": { "type": "string" },
+          "files": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["path", "sha256", "bytes", "executable"],
+              "properties": {
+                "path": { "type": "string" },
+                "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+                "bytes": { "type": "integer" },
+                "executable": { "type": "boolean" }
+              }
+            }
+          },
+          "contentHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "tokens": {
+            "type": "object",
+            "required": ["skillMd", "total"],
+            "properties": { "skillMd": { "type": "integer" }, "total": { "type": "integer" } }
+          }
+        }
+      }
+    },
+    "deprecated": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "message", "alternatives"],
+        "properties": {
+          "name": { "type": "string" },
+          "message": { "type": "string" },
+          "alternatives": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "name": "Meta",
+    "description": "Skills that create, review and maintain other skills in this catalog.",
+    "order": 1
+  },
+  "quality": {
+    "name": "Quality",
+    "description": "Code review, testing strategy and everything that keeps the codebase healthy.",
+    "order": 2
+  },
+  "language": {
+    "name": "Language",
+    "description": "TypeScript conventions and language-level rules shared by every Mass Solutions project.",
+    "order": 3
+  },
+  "frontend": {
+    "name": "Frontend",
+    "description": "React, Next.js, accessibility and UI patterns.",
+    "order": 4
+  },
+  "backend": {
+    "name": "Backend",
+    "description": "NestJS, API design and server-side conventions.",
+    "order": 5
+  },
+  "workflow": {
+    "name": "Workflow",
+    "description": "Git, commits, pull requests and delivery process.",
+    "order": 6
+  },
+  "security": {
+    "name": "Security",
+    "description": "Secure coding checklists and threat-aware reviews.",
+    "order": 7
+  },
+  "performance": {
+    "name": "Performance",
+    "description": "Web performance, Core Web Vitals and bundle hygiene.",
+    "order": 8
+  }
+}

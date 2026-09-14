@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://maiconsouza89.github.io/mass-agents-skills/schemas/lockfile.schema.json",
+  "title": "mass-skills lockfile (.mass-skills.lock.json)",
+  "type": "object",
+  "required": ["lockVersion", "registry", "skills"],
+  "properties": {
+    "lockVersion": { "const": 1 },
+    "registry": {
+      "type": "object",
+      "required": ["repo", "ref"],
+      "properties": { "repo": { "type": "string" }, "ref": { "type": "string" } }
+    },
+    "skills": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["version", "contentHash", "method", "agents", "installedAt", "updatedAt"],
+        "properties": {
+          "version": { "type": "string" },
+          "contentHash": { "type": "string" },
+          "method": { "enum": ["copy", "symlink"] },
+          "agents": { "type": "array", "items": { "type": "string" } },
+          "installedAt": { "type": "string", "format": "date-time" },
+          "updatedAt": { "type": "string", "format": "date-time" }
+        }
+      }
+    }
+  }
+}

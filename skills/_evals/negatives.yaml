@@ -1,0 +1,12 @@
+# Prompts that must NOT trigger any skill in the catalog.
+# The trigger evaluator counts a hit on any of these as a false positive for the skill that fired.
+- "what is the capital of France"
+- "translate this paragraph to Spanish"
+- "write a haiku about autumn"
+- "how many calories are in an avocado"
+- "summarize the plot of Dune"
+- "convert 30 celsius to fahrenheit"
+- "what time zone is Tokyo in"
+- "recommend a good sci-fi novel"
+- "explain the rules of chess"
+- "draft a birthday message for my mother"

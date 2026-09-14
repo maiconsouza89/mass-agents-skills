@@ -1,0 +1,49 @@
+{
+  "name": "@mass-solutions/agent-skills",
+  "version": "0.1.0",
+  "description": "Mass Solutions skills catalog for AI coding agents: validated SKILL.md packages, an installer CLI and a Claude Code plugin marketplace.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maiconsouza89/mass-agents-skills.git"
+  },
+  "homepage": "https://maiconsouza89.github.io/mass-agents-skills/",
+  "bin": {
+    "mass-skills": "dist/bin.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22.18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build:cli": "esbuild src/cli/bin.ts --bundle --platform=node --format=esm --target=node22 --outfile=dist/bin.js --banner:js=\"#!/usr/bin/env node\" && node -e \"require('fs').chmodSync('dist/bin.js', 0o755)\"",
+    "build:site": "node site/build.ts --base /mass-agents-skills/",
+    "build": "npm run build:cli && npm run build:site",
+    "prepare": "npm run build:cli",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test \"src/**/*.test.ts\" \"tools/**/*.test.ts\"",
+    "validate": "node tools/validate-skills.ts",
+    "registry": "node tools/generate-registry.ts",
+    "registry:check": "node tools/generate-registry.ts --check",
+    "eval:triggers": "node tools/eval-triggers.ts",
+    "staleness": "node tools/staleness-report.ts --days 90",
+    "new-skill": "node tools/new-skill.ts",
+    "dev:site": "node site/build.ts && npx -y serve site/dist",
+    "check": "npm run typecheck && npm run validate && npm run registry:check && npm test && npm run eval:triggers"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.0",
+    "esbuild": "^0.25.0",
+    "marked": "^15.0.0",
+    "typescript": "^5.9.0",
+    "yaml": "^2.8.0"
+  }
+}

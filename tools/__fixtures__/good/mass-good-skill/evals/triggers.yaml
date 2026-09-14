@@ -1,0 +1,8 @@
+positive:
+  - "validate the fixture"
+  - "run the good fixture please"
+  - "check the sample skill"
+negative:
+  - prompt: "review my pull request"
+  - prompt: "what is the capital of France"
+  - prompt: "write a haiku"

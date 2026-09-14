@@ -1,0 +1,9 @@
+node_modules/
+dist/
+site/dist/
+.mass-skills/
+.mass-skills.lock.json
+*.log
+.DS_Store
+coverage/
+.tmp/

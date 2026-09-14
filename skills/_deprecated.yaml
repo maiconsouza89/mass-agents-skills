@@ -1,0 +1,7 @@
+# Skills that were renamed or removed. The CLI refuses to install them and points to the alternatives.
+#
+# - name: old-skill-name
+#   message: Why it went away and what to use instead.
+#   alternatives:
+#     - mass-new-skill
+[]
