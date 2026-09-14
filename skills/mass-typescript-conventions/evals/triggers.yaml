@@ -1,0 +1,14 @@
+positive:
+  - "type this properly, it is full of any"
+  - "make this module strict according to our TypeScript conventions"
+  - "remove the any and the non-null assertions from the invoice service"
+  - "set up tsconfig and eslint for the new package following our standards"
+  - "refactor these boolean flags into a proper union type"
+negative:
+  - prompt: "split this React component into smaller ones"
+    expect: mass-react-components
+  - prompt: "create a NestJS module for payments"
+    expect: mass-nestjs-modules
+  - prompt: "review my pull request"
+    expect: mass-code-review
+  - prompt: "what is the capital of France"

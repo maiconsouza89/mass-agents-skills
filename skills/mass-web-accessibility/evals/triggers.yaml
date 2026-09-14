@@ -1,0 +1,14 @@
+positive:
+  - "audit the signup form for accessibility"
+  - "our dropdown does not work with the keyboard"
+  - "make this page WCAG AA compliant"
+  - "screen reader users cannot find the error message on the form"
+  - "add a11y tests with axe to the checkout"
+negative:
+  - prompt: "create a card component for the dashboard"
+    expect: mass-react-components
+  - prompt: "the page has a bad LCP, improve performance"
+    expect: mass-web-performance
+  - prompt: "review this pull request"
+    expect: mass-code-review
+  - prompt: "how many calories are in an avocado"

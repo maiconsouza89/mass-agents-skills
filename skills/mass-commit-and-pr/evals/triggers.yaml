@@ -1,0 +1,13 @@
+positive:
+  - "commit this"
+  - "write a commit message for these changes"
+  - "open a PR for my branch"
+  - "create a pull request with a proper description"
+  - "what should I name the branch for the invoice PDF feature"
+negative:
+  - prompt: "review this pull request before I merge"
+    expect: mass-code-review
+  - prompt: "why is CI failing on the lint step"
+  - prompt: "write unit tests for the checkout service"
+    expect: mass-testing-strategy
+  - prompt: "draft a birthday message for my mother"

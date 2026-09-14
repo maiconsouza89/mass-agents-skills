@@ -1,0 +1,14 @@
+positive:
+  - "create a NestJS module for invoices with create and get by id"
+  - "add an endpoint in Nest to mark an order as paid"
+  - "the orders controller has 300 lines of business logic, where should it go"
+  - "new service and controller for customers in our Nest app"
+  - "Nest cannot resolve dependencies of InvoicesService"
+negative:
+  - prompt: "what should the pagination response look like for our REST API"
+    expect: mass-api-design
+  - prompt: "type this properly, it is full of any"
+    expect: mass-typescript-conventions
+  - prompt: "write unit tests for the checkout service"
+    expect: mass-testing-strategy
+  - prompt: "what time zone is Tokyo in"

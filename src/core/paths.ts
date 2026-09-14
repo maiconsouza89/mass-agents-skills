@@ -54,5 +54,5 @@ export async function walkFiles(dir: string): Promise<WalkedFile[]> {
     }
   }
   await visit(dir, '')
-  return out.sort((a, b) => a.path.localeCompare(b.path))
+  return out.sort((a, b) => (a.path < b.path ? -1 : a.path > b.path ? 1 : 0))
 }

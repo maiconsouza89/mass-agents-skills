@@ -1,0 +1,14 @@
+positive:
+  - "the landing page has an LCP of 4.8 seconds, improve it"
+  - "typing in the search box lags, why does this re-render"
+  - "our Lighthouse performance score dropped to 60"
+  - "the bundle size doubled after the last release"
+  - "the dashboard page is slow on mobile"
+negative:
+  - prompt: "split this React component into smaller ones"
+    expect: mass-react-components
+  - prompt: "after I update a customer the page shows stale data"
+    expect: mass-nextjs-app-router
+  - prompt: "audit this form for accessibility"
+    expect: mass-web-accessibility
+  - prompt: "summarize the plot of Dune"

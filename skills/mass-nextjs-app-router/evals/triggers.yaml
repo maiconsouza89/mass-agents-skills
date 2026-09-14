@@ -1,0 +1,14 @@
+positive:
+  - "add an invoices page to the Next.js app with a create form"
+  - "should this be a server component or a client component"
+  - "after I update a customer the detail page still shows the old name"
+  - "set up caching and revalidation for the products route"
+  - "add a route handler for the webhook in the app directory"
+negative:
+  - prompt: "split this React component, it is too big"
+    expect: mass-react-components
+  - prompt: "design the REST API for invoices with pagination"
+    expect: mass-api-design
+  - prompt: "improve the LCP score of the landing page"
+    expect: mass-web-performance
+  - prompt: "write a haiku about autumn"

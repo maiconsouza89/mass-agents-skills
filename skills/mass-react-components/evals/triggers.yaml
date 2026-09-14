@@ -1,0 +1,16 @@
+positive:
+  - "create a component that shows an invoice line with a pay button"
+  - "OrderPage.tsx is 600 lines, split this component"
+  - "where should the filter state live in this React screen"
+  - "refactor this React code, the props are a mess"
+  - "add a new UI card component to the dashboard"
+negative:
+  - prompt: "should this page be a server component or a client component"
+    expect: mass-nextjs-app-router
+  - prompt: "audit this form for accessibility"
+    expect: mass-web-accessibility
+  - prompt: "the dashboard renders slowly, profile it"
+    expect: mass-web-performance
+  - prompt: "type this properly, it is full of any"
+    expect: mass-typescript-conventions
+  - prompt: "translate this paragraph to Spanish"

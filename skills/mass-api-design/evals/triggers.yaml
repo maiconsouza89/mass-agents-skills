@@ -1,0 +1,14 @@
+positive:
+  - "design the invoices list endpoint with filters and pagination"
+  - "what should the error response format look like for our REST API"
+  - "how do we version the API when we change the customer payload"
+  - "define the HTTP contract for the payments service"
+  - "every service returns errors differently, standardize ours"
+negative:
+  - prompt: "create a NestJS module for invoices"
+    expect: mass-nestjs-modules
+  - prompt: "add a route handler for the webhook in the Next.js app directory"
+    expect: mass-nextjs-app-router
+  - prompt: "review this pull request"
+    expect: mass-code-review
+  - prompt: "recommend a good sci-fi novel"

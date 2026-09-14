@@ -1,0 +1,14 @@
+positive:
+  - "write unit tests for the checkout service"
+  - "write tests for this React component"
+  - "the checkout e2e test fails randomly in CI"
+  - "how should I test the invoice repository"
+  - "add an end-to-end test for the signup flow with Playwright"
+negative:
+  - prompt: "review this pull request"
+    expect: mass-code-review
+  - prompt: "audit this form for accessibility"
+    expect: mass-web-accessibility
+  - prompt: "measure the bundle size and improve the LCP"
+    expect: mass-web-performance
+  - prompt: "explain the rules of chess"

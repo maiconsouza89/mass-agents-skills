@@ -35,10 +35,9 @@ export function extractTriggerPhrases(useWhen: string): string[] {
 const STOPWORDS = new Set([
   'a', 'an', 'the', 'and', 'or', 'of', 'to', 'in', 'on', 'for', 'with', 'is', 'are', 'be', 'this', 'that',
   'it', 'as', 'at', 'by', 'from', 'my', 'our', 'your', 'you', 'i', 'we', 'me', 'can', 'do', 'does', 'not',
-  'use', 'when', 'user', 'says', 'asks', 'please', 'help', 'want', 'need', 'some', 'any', 'into', 'about',
-  'up', 'out', 'so', 'if', 'then', 'than', 'too', 'very', 'just', 'also', 'how', 'what', 'which', 'like',
-  'mass', 'skill', 'skills', 'code', 'project', 'app', 'new', 'existing', 'make', 'get', 'add', 'should',
-  'before', 'after', 'while', 'have', 'has', 'had', 'its', 'their', 'them', 'they', 'there', 'here', 'via',
+  'use', 'when', 'user', 'says', 'asks', 'please', 'some', 'into', 'about', 'up', 'out', 'so', 'if', 'then',
+  'than', 'too', 'very', 'just', 'also', 'how', 'what', 'which', 'like', 'should', 'before', 'after',
+  'while', 'have', 'has', 'had', 'its', 'their', 'them', 'they', 'there', 'here', 'via', 'one', 'two',
 ])
 
 /** Very light stemmer: strips common English suffixes so "reviewing" and "review" collide. */
@@ -46,7 +45,7 @@ export function stem(word: string): string {
   if (word.length <= 4) return word
   return word
     .replace(/(ations|ation|ities|ity|ness|ments|ment)$/, '')
-    .replace(/(ings|ing|ies|ers|ied|ed|es|er|ly|s)$/, '')
+    .replace(/(ings|ing|ies|ers|ied|ed|es|er|ly|s|y)$/, '')
 }
 
 export function tokenize(text: string): string[] {
