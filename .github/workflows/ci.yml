@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Validate, test and build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Validate skills
+        run: npm run validate
+
+      - name: Registry and README are up to date
+        run: node tools/generate-registry.ts --check --readme
+
+      - name: Tests
+        run: npm test
+
+      - name: Trigger evals
+        run: node tools/eval-triggers.ts --json > eval-report.json && node tools/eval-triggers.ts
+
+      - name: Build CLI and site
+        run: npm run build
+
+      - name: Validate Claude Code plugin manifests
+        continue-on-error: true
+        run: npx --yes @anthropic-ai/claude-code@latest plugin validate .
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: eval-report
+          path: eval-report.json
+          retention-days: 14

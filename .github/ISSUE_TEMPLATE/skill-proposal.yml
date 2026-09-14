@@ -1,0 +1,57 @@
+name: Skill proposal
+description: Propose a new skill for the catalog.
+title: 'skill: mass-'
+labels: [skill-proposal]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Skill name
+      description: kebab-case, prefixed with mass-
+      placeholder: mass-feature-flags
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: What should the agent produce when this skill is active?
+      description: Describe the artifact or behaviour, not the topic.
+    validations:
+      required: true
+  - type: textarea
+    id: triggers
+    attributes:
+      label: Three requests people actually type that should trigger it
+      placeholder: |
+        - "add a feature flag for the new checkout"
+        - "how do we roll out behind a flag"
+        - "clean up the old flags"
+    validations:
+      required: true
+  - type: textarea
+    id: negatives
+    attributes:
+      label: Requests it must NOT handle, and which existing skill should
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options: [meta, quality, language, frontend, backend, workflow, security, performance, other (explain below)]
+    validations:
+      required: true
+  - type: input
+    id: owner
+    attributes:
+      label: Proposed owner (@handle)
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched the catalog and no existing skill covers this
+          required: true
+        - label: If an AI agent helped write this proposal, I reviewed it and can defend every part
