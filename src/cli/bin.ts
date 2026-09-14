@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { realpathSync } from 'node:fs'
+import { pathToFileURL } from 'node:url'
 import { parseArgs } from 'node:util'
 import { doctorCommand, installCommand, listCommand, removeCommand, searchCommand, updateCommand } from './commands.ts'
 import { CliError, createContext } from './lib/context.ts'
@@ -139,6 +141,16 @@ function splitSkillsAndAgents(positionals: string[]): { names: string[]; agentsF
 
 export const CLI_VERSION = '0.1.0'
 
-if (process.argv[1] && /bin\.(ts|js)$/.test(process.argv[1])) {
+// Run when executed directly, including through the npm bin symlink (node_modules/.bin/mass-skills).
+const invokedPath = process.argv[1] ? pathToFileURL(safeRealpath(process.argv[1])).href : ''
+if (invokedPath === import.meta.url) {
   run(process.argv.slice(2)).then((code) => process.exit(code))
+}
+
+function safeRealpath(path: string): string {
+  try {
+    return realpathSync(path)
+  } catch {
+    return path
+  }
 }
