@@ -48,7 +48,7 @@ jobs:
           if [ ! -s notes.md ]; then echo "See CHANGELOG.md." > notes.md; fi
 
       - name: Create GitHub release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           body_path: notes.md
           files: dist/bin.js
